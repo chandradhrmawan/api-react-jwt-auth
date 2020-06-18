@@ -4,6 +4,7 @@ const app  		= express();
 const bodyParser = require('body-parser');
 const RouteUser = require('./routes/User');
 const mongoose 	= require('mongoose');
+const cors 		= require('cors');
 
 mongoose.connect(process.env.MONGO_URL,{
 	useNewUrlParser : true,
@@ -16,8 +17,8 @@ mongoose.connect(process.env.MONGO_URL,{
 	console.log('gagal konek mongodb');
 })
 
+app.use(cors());
 app.use(bodyParser.json());
-
 app.use('/',RouteUser);
 
 app.listen(process.env.PORT, (req,res) => {
